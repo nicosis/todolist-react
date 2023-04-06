@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import '../../styles/ToDoList.css'
 
 const ToDoList = () => {
   const [currentWord, setCurrentWord] = useState("");
-  console.log(currentWord);
   const [words, setWords] = useState([]);
-  console.log(words);
 
   return (
-    <div className="container bg-light text-dark">
-      <h1>todos</h1>
+    <div className="container">
+      <h1>to do list</h1>
       <input
         type="text"
         onChange={(e) => setCurrentWord(e.target.value)}
@@ -18,7 +17,7 @@ const ToDoList = () => {
         }}
         value={currentWord}
         maxLength={255}
-        className="form-control fs-3 mt-2"
+        className="form-control"
         id="word"
       ></input>
       <ul className="list-group">
