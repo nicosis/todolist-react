@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../../styles/ToDoList.css'
+import "../../styles/ToDoList.css";
 
 const ToDoList = () => {
   const [currentWord, setCurrentWord] = useState("");
@@ -12,14 +12,14 @@ const ToDoList = () => {
         type="text"
         onChange={(e) => setCurrentWord(e.target.value)}
         onKeyDown={(e) => {
-          e.key === "Enter" &&
-            (setWords([...words, currentWord]), setCurrentWord(""));
+          if (e.key === "Enter" && currentWord.trim()) {
+            setWords([...words, currentWord], setCurrentWord(""));
+          }
         }}
         value={currentWord}
-        maxLength={255}
+        maxLength={120}
         className="form-control"
-        id="word"
-      ></input>
+      />
       <ul className="list-group">
         {words.map((w) => (
           <li className="list-group-item">{w}</li>
@@ -30,3 +30,4 @@ const ToDoList = () => {
 };
 
 export default ToDoList;
+
