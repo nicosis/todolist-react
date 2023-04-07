@@ -1,33 +1,43 @@
 import React, { useState } from "react";
 import "../../styles/ToDoList.css";
+import { FaBeer } from "react-icons/fa";
 
 const ToDoList = () => {
-  const [currentWord, setCurrentWord] = useState("");
-  const [words, setWords] = useState([]);
+  const [currentTask, setCurrentTask] = useState("");
+  const [tasks, setTasks] = useState([]);
 
   return (
     <div className="container">
       <h1>to do list</h1>
       <input
         type="text"
-        onChange={(e) => setCurrentWord(e.target.value)}
+        onChange={(e) => setCurrentTask(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter" && currentWord.trim()) {
-            setWords([...words, currentWord], setCurrentWord(""));
+          if (e.key === "Enter" && currentTask.trim()) {
+            setTasks([...tasks, currentTask], setCurrentTask(""));
           }
         }}
-        value={currentWord}
+        value={currentTask}
         maxLength={120}
         className="form-control"
       />
       <ul className="list-group">
-        {words.map((w) => (
-          <li className="list-group-item">{w}</li>
+        {tasks.map((item, index) => (
+          <li className="list-group-item" key={index}>
+            {item}{" "}
+            <FaBeer className="text-end"
+              onClick={() =>
+                setTasks(
+                  tasks.filter((_, filterIndex) => index !== filterIndex)
+                )
+              }
+            />
+          </li>
         ))}
       </ul>
+      <p>{tasks.length} Item left</p>
     </div>
   );
 };
 
 export default ToDoList;
-
