@@ -1,8 +1,17 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: #bdbdbd;
-  font-family: Lato, sans-serif;
+h1, p {
+    color: #77037b;
+}
+
+.trash-icon {
+  cursor: pointer;
+}
+
+#li:nth-child(2n + 1) {
+  background-color: #D5B4B4;
+  color:#77037b;
+}
+
+#li:nth-child(2n + 2) {
+  background-color: #E4D0D0;
+  color: #77037b;
 }
