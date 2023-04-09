@@ -2,6 +2,10 @@ h1, p {
     color: #77037b;
 }
 
+small {
+  opacity: 0.5;
+}
+
 .trash-icon {
   cursor: pointer;
 }

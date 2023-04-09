@@ -5,6 +5,8 @@ import { FiDelete } from "react-icons/fi";
 const ToDoList = () => {
   const [currentTask, setCurrentTask] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [showTrash, setShowTrash] = useState("d-none");
+
   return (
     <div className="container my-2">
       <h1>to do list</h1>
@@ -22,11 +24,17 @@ const ToDoList = () => {
       />
       <ul className="list-group">
         {tasks.map((item, index) => (
-          <li id='li' className="list-group-item d-flex justify-content-between align-items-center" key={index}>
+          <li
+            id="li"
+            onMouseEnter={() => setShowTrash("")}
+            onMouseLeave={() => setShowTrash("d-none")}
+            className="list-group-item d-flex justify-content-between align-items-center"
+            key={index}
+          >
             {item}
             <span>
               <FiDelete
-                className="trash-icon"
+                className={`trash-icon ${showTrash}`}
                 onClick={() =>
                   setTasks(
                     tasks.filter((_, filterIndex) => index !== filterIndex)
@@ -37,7 +45,7 @@ const ToDoList = () => {
           </li>
         ))}
       </ul>
-      <p>{tasks.length !== 0 && `${tasks.length} Items left` }</p>
+      <small>{tasks.length !== 0 && `${tasks.length} Items left`}</small>
     </div>
   );
 };
