@@ -5,7 +5,6 @@ import { FiDelete } from "react-icons/fi";
 const ToDoList = () => {
   const [currentTask, setCurrentTask] = useState("");
   const [tasks, setTasks] = useState([]);
-
   return (
     <div className="container my-2">
       <h1>to do list</h1>
@@ -38,7 +37,7 @@ const ToDoList = () => {
           </li>
         ))}
       </ul>
-      <p>{tasks.length} Items left</p>
+      <p>{tasks.length !== 0 && `${tasks.length} Items left` }</p>
     </div>
   );
 };
