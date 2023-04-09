@@ -16,10 +16,10 @@ const ToDoList = () => {
         onChange={(e) => setCurrentTask(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter" && currentTask.trim()) {
-            setTasks([...tasks, currentTask], setCurrentTask(""));
+            setTasks([...tasks, currentTask], setCurrentTask("")); //porque setCurrentTask enta dentro de un hook
           }
         }}
-        value={currentTask}
+        value={currentTask} // esto es solo para actualizar el input a ""?
         maxLength={120}
       />
       <ul className="list-group">
@@ -29,7 +29,7 @@ const ToDoList = () => {
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(-1)}
             className="list-group-item d-flex justify-content-between align-items-center"
-            // key={index}
+            key={index}
           >
             {item}
             <span>
