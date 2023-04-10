@@ -6,6 +6,10 @@ const ToDoList = () => {
   const [currentTask, setCurrentTask] = useState("");
   const [tasks, setTasks] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const [currentFilterTask, setCurrentFilterTask] = useState("");
+  console.log(currentFilterTask);
+
+  const filteredTasks = tasks.filter((item) => item.toLowerCase().includes(currentFilterTask.toLowerCase()))
 
   return (
     <div className="container my-5 w-50">
@@ -16,14 +20,24 @@ const ToDoList = () => {
         onChange={(e) => setCurrentTask(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter" && currentTask.trim()) {
-            setTasks([...tasks, currentTask], setCurrentTask("")); //porque setCurrentTask enta dentro de un hook
+            setTasks([currentTask, ...tasks]), setCurrentTask("");
           }
         }}
         value={currentTask} // esto es solo para actualizar el input a ""?
+        placeholder="Nueva tarea"
+        maxLength={120}
+      />
+      <input
+        className="form-control mb-3"
+        type="text"
+        onChange={(e) => {
+          setCurrentFilterTask(e.target.value);
+        }}
+        placeholder="Filtrar tarea"
         maxLength={120}
       />
       <ul className="list-group">
-        {tasks.map((item, index) => (
+        {filteredTasks.map((item, index) => (
           <li
             id="li"
             onMouseEnter={() => setHoveredIndex(index)}
@@ -38,7 +52,7 @@ const ToDoList = () => {
                   className={`trash-icon`}
                   onClick={() =>
                     setTasks(
-                      tasks.filter((_, filterIndex) => index !== filterIndex)
+                      filteredTasks.filter((_, filterIndex) => index !== filterIndex)
                     )
                   }
                 />
@@ -47,7 +61,7 @@ const ToDoList = () => {
           </li>
         ))}
       </ul>
-      <small>{tasks.length !== 0 && `${tasks.length} Items left`}</small>
+      <small>{tasks.length !== 0 && `${filteredTasks.length} Items left`}</small>
     </div>
   );
 };
